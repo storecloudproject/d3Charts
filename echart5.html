@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+
+<head>
+  <!-- Include the ECharts file you just downloaded -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .chart {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="chart" id="echarts-5"></div>
+  <script src="shared.js"></script>
+  <script>
+function drawEChart5(data, title, headers) {
+  const dateList = data?.Date;
+  const myChart = echarts.init(document.getElementById("echarts-5"));
+  const series = [];
+  delete data?.Date;
+  headers?.forEach((h) => {
+    const _data = data?.[h];
+    series.push({
+      data: parseNumbers(_data),
+      type: "line",
+      name: h,
+      smooth: true,
+      smoothMonotone: "x",
+      symbol: "none",
+      symbolSize: 2,
+      lineStyle: {
+        width: 2.5,
+      },
+      emphasis: {
+        focus: "series",
+      },
+    });
+  });
+  const _media = JSON.parse(JSON.stringify(media));
+  _media[0].option.grid.bottom = '110';
+  _media[0].option.grid.left = '40';
+  const option = {
+    title: {
+      text: title,
+      ...titleStyle,
+    },
+    color: [
+      "#DE2F8F",
+      "#12BC81",
+      "#254294",
+      "#0071C6",
+      "#F54A4A",
+      "#AF52C7",
+    ],
+    textStyle,
+    xAxis: {
+      type: "category",
+      data: dateList,
+      name: "Age of Network in Years",
+      nameLocation: "middle",
+      nameGap: "40",
+      nameTextStyle: {
+        color: "#333",
+      },
+      axisTick: {
+        alignWithLabel: true,
+      },
+    },
+    tooltip: {
+      trigger: "axis",
+      confine: true
+    },
+    legend: {
+      data: headers,
+      ...legendStyle,
+    },
+    calculable: true,
+    grid: {
+      show: true,
+      top: "70",
+      bottom: "90",
+    },
+    yAxis: {
+      type: "value",
+      name: "Inflationary Rewards Plus Emissions (in millions)",
+      nameLocation: "middle",
+      max: 1000000000,
+      nameGap: "80",
+      nameTextStyle: {
+        color: "#333",
+      },
+      nameTextStyle: {
+        fontSize: 14,
+      },
+      axisLabel: {
+        formatter: function (value, index) {
+          return (value / 1000000)?.toLocaleString();
+        },
+      },
+    },
+    series: series,
+    media: _media
+  };
+  myChart.setOption(option);
+ resizeChart(myChart);
+}
+    // drawEChart5
+$.get(googleSheetUrl + "694509505&single=true&output=csv", function (csvStr) {
+  // parse data using Papa Parse
+  let data = Papa.parse(csvStr, {
+    skipEmptyLines: true,
+    header: false,
+  })?.data;
+  const title = data?.[0]?.[0];
+  let headers = data?.[1];
+  data = data?.slice(2);
+  const array_data = [];
+
+  // prepapre data
+  headers?.forEach((h) => {
+    const index = headers?.findIndex((header) => header === h);
+    const _d = [];
+    data?.forEach((d) => {
+      _d.push(d[index]);
+    });
+    array_data[h || "Date"] = _d;
+  });
+  headers = headers?.slice(1)?.sort((a, b) => a?.localeCompare(b?.firstname));
+
+  // draw data
+  drawEChart5(array_data, title, headers);
+});
+
+  </script>
+</body>
+</html>
