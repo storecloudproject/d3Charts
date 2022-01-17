@@ -334,8 +334,8 @@ function drawEChart7(data, title, headers) {
         name: " Growth Rate %",
         nameLocation: "middle",
         nameGap: "80",
-        max: 100,
-        min: 0,
+        // max: 100,
+        // min: 0,
         nameTextStyle: {
           color: "#333",
         },
