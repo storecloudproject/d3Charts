@@ -254,7 +254,9 @@ function drawEChart7(data, title, headers) {
   const _color = ["#AF69C5", "#009E96"];
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "80";
-
+  _media[0].option.grid.right = "50";
+  _media[0].option.grid.left = "80";
+  _media[0].option.yAxis[0].nameGap = "60";
   const option = {
     title: {
       text: title,
@@ -416,7 +418,9 @@ function drawEChart6(data, title, headers) {
     });
     const _media = JSON.parse(JSON.stringify(media));
     _media[0].option.grid.bottom = "110";
-    _media[0].option.grid.left = "40";
+    _media[0].option.grid.right = "50";
+    _media[0].option.grid.left = "55";
+    _media[0].option.yAxis[0].nameGap = "40";
   const option = {
     title: {
       text: "Revenue per Governance Fund (USD Value)",
@@ -526,7 +530,7 @@ function drawEChart5(data, title, headers) {
   });
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "110";
-  _media[0].option.grid.left = "40";
+  _media[0].option.grid.left = "60";
   const option = {
     title: {
       text: title,
@@ -630,7 +634,8 @@ function drawEChart4(data, title, headers) {
   });
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "80";
-  _media[0].option.grid.right = "60";
+  _media[0].option.grid.right = "65";
+  _media[0].option.yAxis[1].nameGap = "50";
   const option = {
     title: {
       text: title,
@@ -701,6 +706,8 @@ function drawEChart3(data, title, headers) {
   const _color = ["#009E96", "#062587", "#AF69C5"];
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "80";
+  _media[0].option.grid.left = "65";
+  _media[0].option.yAxis[0].nameGap = "50";
   const option = {
     title: {
       text: title,
@@ -791,6 +798,9 @@ function drawEChart2(data, title, headers) {
       });
     });
 
+    const _media = JSON.parse(JSON.stringify(media));
+  _media[0].option.grid.left = "60";
+  _media[0].option.yAxis[0].nameGap = "45";
   const option = {
     title: {
       text: title,
@@ -833,7 +843,7 @@ function drawEChart2(data, title, headers) {
       axisLabel,
     },
     series: series,
-    media,
+    media: _media
   };
   myChart.setOption(option);
   resizeChart(myChart);
@@ -863,6 +873,10 @@ function drawEChart1(data, title, headers) {
   });
   const _color = JSON.parse(JSON.stringify(color));
   _color[0] = "#dfdf02";
+  const _media = JSON.parse(JSON.stringify(media));
+  _media[0].option.grid.left = "65";
+  _media[0].option.yAxis[0].nameGap = "50";
+  _media[0].option.grid.bottom = "135";
   const option = {
     title: {
       text: title,
@@ -911,7 +925,7 @@ function drawEChart1(data, title, headers) {
       axisLabel,
     },
     series: series,
-    media,
+    media: _media
   };
   myChart.setOption(option);
   resizeChart(myChart);

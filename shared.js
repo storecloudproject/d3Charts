@@ -72,6 +72,14 @@ const media = [
         right: 20,
         bottom: "185",
       },
+      yAxis: [
+        {
+          nameGap: "40",
+        },
+        {
+          nameGap: "30",
+        },
+      ],
     },
   },
   {
