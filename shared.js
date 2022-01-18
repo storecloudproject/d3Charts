@@ -80,6 +80,12 @@ const media = [
           nameGap: "30",
         },
       ],
+      series: {
+        label: {
+          fontSize: 12,
+          fontWeight: 'normal',
+        }
+      }
     },
   },
   {
