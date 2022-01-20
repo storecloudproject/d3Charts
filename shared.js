@@ -10,6 +10,7 @@ const color = [
   "#254294",
   "#12BC81",
 ];
+const backgroundColor = '#fff';
 const textStyle = {
   fontFamily: "Montserrat",
   fontSize: 10,

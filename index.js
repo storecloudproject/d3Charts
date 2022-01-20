@@ -925,6 +925,7 @@ function drawEChart1(data, title, headers) {
       },
       axisLabel,
     },
+    backgroundColor,
     series: series,
     media: _media
   };
