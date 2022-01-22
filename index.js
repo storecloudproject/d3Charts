@@ -364,6 +364,7 @@ function drawEChart7(data, title, headers) {
         axisLabel,
       },
     ],
+    backgroundColor,
     series: series,
     media: _media,
   };
@@ -500,6 +501,7 @@ function drawEChart6(data, title, headers) {
         },
       },
     ],
+    backgroundColor,
     series: series,
     media: _media,
   };
@@ -584,6 +586,7 @@ function drawEChart5(data, title, headers) {
         },
       },
     },
+    backgroundColor,
     series: series,
     media: _media,
   };
@@ -676,6 +679,7 @@ function drawEChart4(data, title, headers) {
       bottom: "80",
     },
     yAxis,
+    backgroundColor,
     series: series,
     media: _media,
   };
@@ -762,6 +766,7 @@ function drawEChart3(data, title, headers) {
       },
       axisLabel,
     },
+    backgroundColor,
     series: series,
     media: _media,
   };
@@ -843,6 +848,7 @@ function drawEChart2(data, title, headers) {
       },
       axisLabel,
     },
+    backgroundColor,
     series: series,
     media: _media
   };
