@@ -235,7 +235,7 @@ function drawEChart7(data, title, headers) {
       series.push({
         data: parseNumbers(_data),
         type: "line",
-        name: h === "Bitcoins"? "Total Money Supply": "Growth Rate %",
+        name: h === "Bitcoins" ? "Total Money Supply" : "Growth Rate %",
         smooth: false,
         smoothMonotone: "x",
         symbol: "none",
@@ -273,11 +273,11 @@ function drawEChart7(data, title, headers) {
         nameTextStyle: {
           color: "#333",
         },
-        data: parseNumbers(blockHeight)?.map(d => parseInt(d/1000)),
+        data: parseNumbers(blockHeight)?.map((d) => parseInt(d / 1000)),
         axisTick: {
           alignWithLabel: true,
         },
-         axisLabel: {
+        axisLabel: {
           interval: 200,
         },
       },
@@ -311,10 +311,12 @@ function drawEChart7(data, title, headers) {
       formatter: (params) => {
         let label = "";
         for (let index = 0; index < params?.length; index++) {
-          label += `${index == 0 ? params[index]?.axisValue + " Blocks (thousand)" : ""}  <br/>
+          label += `${
+            index == 0 ? params[index]?.axisValue + " Blocks (thousand)" : ""
+          }  <br/>
           ${params[index].marker} ${params[index].seriesName}:  <b>${params[
             index
-          ].value?.toLocaleString()}${index === 0 ? ' (Millions)': '%'}</b>`;
+          ].value?.toLocaleString()}${index === 0 ? " (Millions)" : "%"}</b>`;
         }
         return label;
       },
@@ -401,8 +403,8 @@ function drawEChart6(data, title, headers) {
           show: h === "$STORE Price" ? true : false,
           position: "top",
           fontSize: "14",
-          fontWeight: 'bold',
-          backgroundColor: '#fff',
+          fontWeight: "bold",
+          backgroundColor: "#fff",
           distance: 10,
           color: _color[0],
           formatter: (params) => {
@@ -418,11 +420,11 @@ function drawEChart6(data, title, headers) {
         },
       });
     });
-    const _media = JSON.parse(JSON.stringify(media));
-    _media[0].option.grid.bottom = "110";
-    _media[0].option.grid.right = "50";
-    _media[0].option.grid.left = "55";
-    _media[0].option.yAxis[0].nameGap = "40";
+  const _media = JSON.parse(JSON.stringify(media));
+  _media[0].option.grid.bottom = "110";
+  _media[0].option.grid.right = "50";
+  _media[0].option.grid.left = "55";
+  _media[0].option.yAxis[0].nameGap = "40";
   const option = {
     title: {
       text: "Revenue per Governance Fund (USD Value)",
@@ -804,7 +806,7 @@ function drawEChart2(data, title, headers) {
       });
     });
 
-    const _media = JSON.parse(JSON.stringify(media));
+  const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.left = "60";
   _media[0].option.yAxis[0].nameGap = "45";
   const option = {
@@ -850,7 +852,7 @@ function drawEChart2(data, title, headers) {
     },
     backgroundColor,
     series: series,
-    media: _media
+    media: _media,
   };
   myChart.setOption(option);
   resizeChart(myChart);
@@ -876,14 +878,20 @@ function drawEChart1(data, title, headers) {
       emphasis: {
         focus: "series",
       },
+      label: {
+        normal: {},
+      },
     });
   });
+  console.log(headers);
   const _color = JSON.parse(JSON.stringify(color));
   _color[0] = "#dfdf02";
   const _media = JSON.parse(JSON.stringify(media));
+  _media[1].option.grid.bottom = "140";
+  _media[2].option.grid.bottom = "100";
   _media[0].option.grid.left = "65";
   _media[0].option.yAxis[0].nameGap = "50";
-  _media[0].option.grid.bottom = "135";
+  _media[0].option.grid.bottom = "190";
   const option = {
     title: {
       text: title,
@@ -906,11 +914,19 @@ function drawEChart1(data, title, headers) {
       data: headers,
       bottom: "0",
       itemGap: 15,
-      textStyle: {
-        fontSize: 12,
-        fontFamily: "sans-serif",
-        color: "#6e7079e8",
+      formatter: function (name) {
+        if (name == "Inflationary Block Rewards") {
+          return [
+            `${name}`,
+            "{hr| 20 Million max per year or 2% of the Authorized Supply, non-compounding}",
+          ].join("\n");
+        } else if (name == "Rewards for STORE test networks") {
+          return [`${name}`, "{hr| Up to 4 million $STORE}"].join("\n");
+        } else {
+          return name;
+        }
       },
+      ...legendStyle,
     },
     calculable: true,
     grid: {
@@ -933,196 +949,212 @@ function drawEChart1(data, title, headers) {
     },
     backgroundColor,
     series: series,
-    media: _media
+    media: _media,
   };
   myChart.setOption(option);
   resizeChart(myChart);
 }
 
-$( document ).ready(function() {
+$(document).ready(function () {
   // drawEChart1
-$.get(googleSheetUrl + "0&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[0];
-  let headers = data?.[1];
-  data = data?.slice(2);
-  const array_data = [];
+  $.get(googleSheetUrl + "0&single=true&output=csv", function (csvStr) {
+    // parse data using Papa Parse
+    let data = Papa.parse(csvStr, {
+      skipEmptyLines: true,
+      header: false,
+    })?.data;
+    const title = data?.[0]?.[0];
+    data[1][1] = "Estimated Forever Treasury";
+    data[1][2] = "Rewards for STORE test networks";
+    data[1][3] = "Team and Advisors";
+    data[1][4] = "Estimated 100-Year Ecosystem Treasury";
+    let headers = data?.[1];
+    data = data?.slice(2);
+    const array_data = [];
 
-  // prepapre data
-  headers?.forEach((h) => {
-    const index = headers?.findIndex((header) => header === h);
-    const _d = [];
-    data?.forEach((d) => {
-      _d.push(d[index]);
+    // prepapre data
+    headers?.forEach((h) => {
+      const index = headers?.findIndex((header) => header === h);
+      const _d = [];
+      data?.forEach((d) => {
+        _d.push(d[index]);
+      });
+      array_data[h] = _d;
     });
-    array_data[h] = _d;
-  });
-  headers = headers?.slice(1);
-  // draw data
-  drawEChart1(array_data, title, headers);
-});
-
-// drawEChart2
-$.get(googleSheetUrl + "1694942319&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[1];
-  const array_data = [];
-  array_data["Date"] = data?.[2]?.slice(2);
-  data = data?.slice(3);
-
-  // prepapre data
-  data?.forEach((d) => {
-    array_data[d[1]] = d.slice(2);
-  });
-  const headers = Object.keys(array_data);
-  // draw EChart 2
-  drawEChart2(array_data, title, headers);
-});
-
-// drawEChart3
-$.get(googleSheetUrl + "1834631508&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[0];
-  let headers = data?.[1];
-  data = data?.slice(2);
-  const array_data = [];
-
-  // prepapre data
-  headers?.forEach((h) => {
-    const index = headers?.findIndex((header) => header === h);
-    const _d = [];
-    data?.forEach((d) => {
-      _d.push(d[index]);
-    });
-    array_data[h] = _d;
-  });
-  headers = headers?.slice(1);
-
-  // draw data
-  drawEChart3(array_data, title, headers);
-});
-
-// drawEChart4
-$.get(googleSheetUrl + "1895040396&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[0];
-  let headers = data?.[1];
-  data = data?.slice(2);
-  const array_data = [];
-
-  // prepapre data
-  headers?.forEach((h) => {
-    const index = headers?.findIndex((header) => header === h);
-    const _d = [];
-    data?.forEach((d) => {
-      _d.push(d[index]);
-    });
-    array_data[h || "Date"] = _d;
+    headers = headers?.slice(1);
+    // draw data
+    drawEChart1(array_data, title, headers);
   });
 
-  headers = headers?.slice(1)?.sort((a, b) => a?.localeCompare(b?.firstname));
+  // drawEChart2
+  $.get(
+    googleSheetUrl + "1694942319&single=true&output=csv",
+    function (csvStr) {
+      // parse data using Papa Parse
+      let data = Papa.parse(csvStr, {
+        skipEmptyLines: true,
+        header: false,
+      })?.data;
+      const title = data?.[0]?.[1];
+      const array_data = [];
+      array_data["Date"] = data?.[2]?.slice(2);
+      data = data?.slice(3);
 
-  // draw data
-  drawEChart4(array_data, title, headers);
-});
-
-// drawEChart5
-$.get(googleSheetUrl + "694509505&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[0];
-  let headers = data?.[1];
-  data = data?.slice(2);
-  const array_data = [];
-
-  // prepapre data
-  headers?.forEach((h) => {
-    const index = headers?.findIndex((header) => header === h);
-    const _d = [];
-    data?.forEach((d) => {
-      _d.push(d[index]);
-    });
-    array_data[h || "Date"] = _d;
-  });
-  headers = headers?.slice(1)?.sort((a, b) => a?.localeCompare(b?.firstname));
-
-  // draw data
-  drawEChart5(array_data, title, headers);
-});
-// drawEChart6
-$.get(googleSheetUrl + "476815357&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[1];
-  const array_data = [];
-  array_data["Date"] = data?.[2]?.slice(2);
-  data = data?.slice(1);
-  // prepapre data
-  data?.forEach((d) => {
-    if(d[1] === "Rewards to STORE Foundation (25%)"){
-      array_data["Rewards to Foundation"] = d.slice(2);
-    } else if(d[1] === "Rewards to Miners and Voters (70%)"){
-      array_data["Rewards to Miners and Voters"] = d.slice(2);
-    } else if(d[1] === "Rewards to Markets (5%)"){
-      array_data["Rewards to Markets"] = d.slice(2);
-    } else{
-      array_data[d[1]] = d.slice(2);
+      // prepapre data
+      data?.forEach((d) => {
+        array_data[d[1]] = d.slice(2);
+      });
+      const headers = Object.keys(array_data);
+      // draw EChart 2
+      drawEChart2(array_data, title, headers);
     }
-
-  });
-  const headers = Object.keys(array_data);
-  // draw EChart 2
-  drawEChart6(array_data, title, headers);
-});
-
-$.get(googleSheetUrl + "1709681637&single=true&output=csv", function (csvStr) {
-  // parse data using Papa Parse
-  let data = Papa.parse(csvStr, {
-    skipEmptyLines: true,
-    header: false,
-  })?.data;
-  const title = data?.[0]?.[0];
-  let headers = data?.[1];
-  data = data?.slice(2);
-  const array_data = [];
-  const dateIndex = headers?.findIndex(
-    (header) => header === "Date based on block height"
   );
-  data = data?.filter((d) => d[dateIndex] <= 2038);
-  // prepapre data
-  headers?.forEach((h) => {
-    const index = headers?.findIndex((header) => header === h);
-    const _d = [];
-    data?.forEach((d) => {
-      _d.push(d[index]);
-    });
-    array_data[h] = _d;
-  });
-  headers = headers;
-  // draw data
-  drawEChart7(array_data, title, headers);
-});
-});
 
+  // drawEChart3
+  $.get(
+    googleSheetUrl + "1834631508&single=true&output=csv",
+    function (csvStr) {
+      // parse data using Papa Parse
+      let data = Papa.parse(csvStr, {
+        skipEmptyLines: true,
+        header: false,
+      })?.data;
+      const title = data?.[0]?.[0];
+      let headers = data?.[1];
+      data = data?.slice(2);
+      const array_data = [];
+
+      // prepapre data
+      headers?.forEach((h) => {
+        const index = headers?.findIndex((header) => header === h);
+        const _d = [];
+        data?.forEach((d) => {
+          _d.push(d[index]);
+        });
+        array_data[h] = _d;
+      });
+      headers = headers?.slice(1);
+
+      // draw data
+      drawEChart3(array_data, title, headers);
+    }
+  );
+
+  // drawEChart4
+  $.get(
+    googleSheetUrl + "1895040396&single=true&output=csv",
+    function (csvStr) {
+      // parse data using Papa Parse
+      let data = Papa.parse(csvStr, {
+        skipEmptyLines: true,
+        header: false,
+      })?.data;
+      const title = data?.[0]?.[0];
+      let headers = data?.[1];
+      data = data?.slice(2);
+      const array_data = [];
+
+      // prepapre data
+      headers?.forEach((h) => {
+        const index = headers?.findIndex((header) => header === h);
+        const _d = [];
+        data?.forEach((d) => {
+          _d.push(d[index]);
+        });
+        array_data[h || "Date"] = _d;
+      });
+
+      headers = headers
+        ?.slice(1)
+        ?.sort((a, b) => a?.localeCompare(b?.firstname));
+
+      // draw data
+      drawEChart4(array_data, title, headers);
+    }
+  );
+
+  // drawEChart5
+  $.get(googleSheetUrl + "694509505&single=true&output=csv", function (csvStr) {
+    // parse data using Papa Parse
+    let data = Papa.parse(csvStr, {
+      skipEmptyLines: true,
+      header: false,
+    })?.data;
+    const title = data?.[0]?.[0];
+    let headers = data?.[1];
+    data = data?.slice(2);
+    const array_data = [];
+
+    // prepapre data
+    headers?.forEach((h) => {
+      const index = headers?.findIndex((header) => header === h);
+      const _d = [];
+      data?.forEach((d) => {
+        _d.push(d[index]);
+      });
+      array_data[h || "Date"] = _d;
+    });
+    headers = headers?.slice(1)?.sort((a, b) => a?.localeCompare(b?.firstname));
+
+    // draw data
+    drawEChart5(array_data, title, headers);
+  });
+  // drawEChart6
+  $.get(googleSheetUrl + "476815357&single=true&output=csv", function (csvStr) {
+    // parse data using Papa Parse
+    let data = Papa.parse(csvStr, {
+      skipEmptyLines: true,
+      header: false,
+    })?.data;
+    const title = data?.[0]?.[1];
+    const array_data = [];
+    array_data["Date"] = data?.[2]?.slice(2);
+    data = data?.slice(1);
+    // prepapre data
+    data?.forEach((d) => {
+      if (d[1] === "Rewards to STORE Foundation (25%)") {
+        array_data["Rewards to Foundation"] = d.slice(2);
+      } else if (d[1] === "Rewards to Miners and Voters (70%)") {
+        array_data["Rewards to Miners and Voters"] = d.slice(2);
+      } else if (d[1] === "Rewards to Markets (5%)") {
+        array_data["Rewards to Markets"] = d.slice(2);
+      } else {
+        array_data[d[1]] = d.slice(2);
+      }
+    });
+    const headers = Object.keys(array_data);
+    // draw EChart 2
+    drawEChart6(array_data, title, headers);
+  });
+
+  $.get(
+    googleSheetUrl + "1709681637&single=true&output=csv",
+    function (csvStr) {
+      // parse data using Papa Parse
+      let data = Papa.parse(csvStr, {
+        skipEmptyLines: true,
+        header: false,
+      })?.data;
+      const title = data?.[0]?.[0];
+      let headers = data?.[1];
+      data = data?.slice(2);
+      const array_data = [];
+      const dateIndex = headers?.findIndex(
+        (header) => header === "Date based on block height"
+      );
+      data = data?.filter((d) => d[dateIndex] <= 2038);
+      // prepapre data
+      headers?.forEach((h) => {
+        const index = headers?.findIndex((header) => header === h);
+        const _d = [];
+        data?.forEach((d) => {
+          _d.push(d[index]);
+        });
+        array_data[h] = _d;
+      });
+      headers = headers;
+      // draw data
+      drawEChart7(array_data, title, headers);
+    }
+  );
+});

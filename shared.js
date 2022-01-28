@@ -10,44 +10,50 @@ const color = [
   "#254294",
   "#12BC81",
 ];
-const backgroundColor = '#fff';
+const backgroundColor = "#fff";
 const textStyle = {
   fontFamily: "Montserrat",
   fontSize: 10,
 };
 const titleStyle = {
-    textAlign: "center",
-    textVerticalAlign: "auto",
-    left: "50%",
-    top: "4%",
-    textStyle: {
-      lineHeight: 24,
-      overflow: 'break',
-    }
-}
+  textAlign: "center",
+  textVerticalAlign: "auto",
+  left: "50%",
+  top: "4%",
+  textStyle: {
+    lineHeight: 24,
+    overflow: "break",
+  },
+};
 const legendStyle = {
-    bottom: "0",
-    itemGap: 15,
-    textStyle: {
-      fontSize: 11,
-      fontFamily: "sans-serif",
-      color: "#6e7079e8",
-    }
-}
+  bottom: "0",
+  itemGap: 15,
+  textStyle: {
+    fontSize: 12,
+    color: "#6e7079e8",
+    rich: {
+      hr: {
+        width: "100%",
+        fontSize: 10,
+        height: 15,
+      },
+    },
+  },
+};
 const axisLabel = {
-    formatter: function (value, index) {
-      const ranges = [
-        { divider: 1e6, suffix: 'M' },
-        { divider: 1e3, suffix: 'k' }
-      ];
-      for (var i = 0; i < ranges.length; i++) {
-        if (value >= ranges[i].divider) {
-           return (value / ranges[i].divider).toString() + ranges[i].suffix;
-        }
-       }
-     return value;
-  }
-}
+  formatter: function (value, index) {
+    const ranges = [
+      { divider: 1e6, suffix: "M" },
+      { divider: 1e3, suffix: "k" },
+    ];
+    for (var i = 0; i < ranges.length; i++) {
+      if (value >= ranges[i].divider) {
+        return (value / ranges[i].divider).toString() + ranges[i].suffix;
+      }
+    }
+    return value;
+  },
+};
 const media = [
   {
     query: {
@@ -56,15 +62,15 @@ const media = [
     option: {
       title: {
         textStyle: {
-          width: '300',
-          fontSize: 13
-        }
+          width: "300",
+          fontSize: 13,
+        },
       },
       tooltip: {
         textStyle: {
-          overflow: 'truncate',
-          fontSize: 10
-        }
+          overflow: "truncate",
+          fontSize: 10,
+        },
       },
       grid: {
         show: true,
@@ -84,9 +90,9 @@ const media = [
       series: {
         label: {
           fontSize: 12,
-          fontWeight: 'normal',
-        }
-      }
+          fontWeight: "normal",
+        },
+      },
     },
   },
   {
@@ -96,15 +102,15 @@ const media = [
     option: {
       title: {
         textStyle: {
-          width: '600',
-          fontSize: 16
-        }
+          width: "600",
+          fontSize: 16,
+        },
       },
       tooltip: {
         textStyle: {
-          overflow: 'truncate',
-          fontSize: 12
-        }
+          overflow: "truncate",
+          fontSize: 12,
+        },
       },
       grid: {
         right: 50,
@@ -119,15 +125,15 @@ const media = [
     option: {
       title: {
         textStyle: {
-          width: '900',
-          fontSize: 18
-        }
+          width: "900",
+          fontSize: 18,
+        },
       },
       tooltip: {
         textStyle: {
-          overflow: 'truncate',
-          fontSize: 14
-        }
+          overflow: "truncate",
+          fontSize: 14,
+        },
       },
       grid: {
         right: 50,
@@ -137,14 +143,16 @@ const media = [
   },
 ];
 function parseNumbers(values) {
-  return values?.map((d) => parseFloat(d?.replace(/\,/g,"")?.replace(/\$/g,"")));
+  return values?.map((d) =>
+    parseFloat(d?.replace(/\,/g, "")?.replace(/\$/g, ""))
+  );
 }
-function resizeChart(chart){
-  $(window).on('resize', function(){
-    if(chart != null && chart != undefined){
+function resizeChart(chart) {
+  $(window).on("resize", function () {
+    if (chart != null && chart != undefined) {
       chart.resize();
     }
-});
+  });
 }
 
 //#endregion - static code region.
