@@ -883,7 +883,6 @@ function drawEChart1(data, title, headers) {
       },
     });
   });
-  console.log(headers);
   const _color = JSON.parse(JSON.stringify(color));
   _color[0] = "#dfdf02";
   const _media = JSON.parse(JSON.stringify(media));
@@ -954,7 +953,6 @@ function drawEChart1(data, title, headers) {
   myChart.setOption(option);
   resizeChart(myChart);
 }
-
 $(document).ready(function () {
   // drawEChart1
   $.get(googleSheetUrl + "0&single=true&output=csv", function (csvStr) {
@@ -967,11 +965,10 @@ $(document).ready(function () {
     data[1][1] = "Estimated Forever Treasury";
     data[1][2] = "Rewards for STORE test networks";
     data[1][3] = "Team and Advisors";
-    data[1][4] = "Estimated 100-Year Ecosystem Treasury";
+    data[1][5] = "Estimated 100-Year Ecosystem Treasury";
     let headers = data?.[1];
     data = data?.slice(2);
     const array_data = [];
-
     // prepapre data
     headers?.forEach((h) => {
       const index = headers?.findIndex((header) => header === h);
