@@ -337,7 +337,7 @@ function drawEChart7(data, title, headers) {
         type: "value",
         name: " Growth Rate %",
         nameLocation: "middle",
-        nameGap: "80",
+        nameGap: "60",
         max: 100,
         min: 0,
         nameTextStyle: {
@@ -474,7 +474,7 @@ function drawEChart6(data, title, headers) {
         type: "value",
         name: "Revenue (USD)",
         nameLocation: "middle",
-        nameGap: "80",
+        nameGap: "60",
         max: 150000000,
         nameTextStyle: {
           color: "#333",
@@ -575,7 +575,7 @@ function drawEChart5(data, title, headers) {
       name: "Inflationary Rewards Plus Emissions (in millions)",
       nameLocation: "middle",
       max: 1000000000,
-      nameGap: "80",
+      nameGap: "60",
       nameTextStyle: {
         color: "#333",
       },
@@ -623,7 +623,7 @@ function drawEChart4(data, title, headers) {
       name:
         index === 0 ? "Annual Money Supply Growth Rate" : "Allocated Supply",
       nameLocation: "middle",
-      nameGap: "80",
+      nameGap: "60",
       nameTextStyle: {
         //color: '#333',
         fontSize: 12,
@@ -759,7 +759,7 @@ function drawEChart3(data, title, headers) {
       type: "value",
       name: "$STORE Tokens Issued",
       nameLocation: "middle",
-      nameGap: "80",
+      nameGap: "60",
       nameTextStyle: {
         color: "#333",
       },
@@ -841,7 +841,7 @@ function drawEChart2(data, title, headers) {
       type: "value",
       name: "Maximun inflation + emission per year",
       nameLocation: "middle",
-      nameGap: "80",
+      nameGap: "60",
       nameTextStyle: {
         color: "#333",
       },
@@ -937,7 +937,7 @@ function drawEChart1(data, title, headers) {
       type: "value",
       name: "Cumulative $STORE Tokens",
       nameLocation: "middle",
-      nameGap: "80",
+      nameGap: "60",
       nameTextStyle: {
         color: "#333",
       },
