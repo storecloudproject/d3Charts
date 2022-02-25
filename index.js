@@ -914,12 +914,12 @@ function drawEChart1(data, title, headers) {
       bottom: "0",
       itemGap: 15,
       formatter: function (name) {
-        if (name == "Inflationary Block Rewards") {
+        if (name == "Inflationary Rewards") {
           return [
             `${name}`,
-            "{hr| 20 Million max per year or 2% of the Authorized Supply, non-compounding}",
+            "{hr| 10-20 Million $STORE per year, 1%-2% of Total Supply, non-compounding}",
           ].join("\n");
-        } else if (name == "Rewards for STORE test networks") {
+        } else if (name == "Rewards for Articles Test Network") {
           return [`${name}`, "{hr| Up to 4 million $STORE}"].join("\n");
         } else {
           return name;
@@ -935,7 +935,7 @@ function drawEChart1(data, title, headers) {
     },
     yAxis: {
       type: "value",
-      name: "Cumulative $STORE Tokens",
+      name: "Total Maximum Emissions And Inflation",
       nameLocation: "middle",
       nameGap: "60",
       nameTextStyle: {
@@ -943,6 +943,9 @@ function drawEChart1(data, title, headers) {
       },
       nameTextStyle: {
         fontSize: 14,
+      },
+      max: function (value) {
+        return value.max + (value.max*0.2);
       },
       axisLabel,
     },
@@ -962,10 +965,11 @@ $(document).ready(function () {
       header: false,
     })?.data;
     const title = data?.[0]?.[0];
-    data[1][1] = "Estimated Forever Treasury";
-    data[1][2] = "Rewards for STORE test networks";
+    data[1][1] = "Committed Supply Rewards";
+    data[1][2] = "Rewards for Articles Test Network";
     data[1][3] = "Team and Advisors";
-    data[1][5] = "Estimated 100-Year Ecosystem Treasury";
+    data[1][5] = "Ecosystem Fund";
+    data[1][6] = "Inflationary Rewards";
     let headers = data?.[1];
     data = data?.slice(2);
     const array_data = [];

@@ -48,7 +48,7 @@ const axisLabel = {
     ];
     for (var i = 0; i < ranges.length; i++) {
       if (value >= ranges[i].divider) {
-        return (value / ranges[i].divider).toString() + ranges[i].suffix;
+        return (value / ranges[i].divider).toLocaleString() + ranges[i].suffix;
       }
     }
     return value;
