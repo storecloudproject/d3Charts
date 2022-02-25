@@ -480,7 +480,20 @@ function drawEChart6(data, title, headers) {
         nameTextStyle: {
           fontSize: 14,
         },
-        axisLabel,
+        axisLabel: {
+          formatter: function (value, index) {
+            const ranges = [
+              { divider: 1e6, suffix: "M" },
+              { divider: 1e3, suffix: "k" },
+            ];
+            for (var i = 0; i < ranges.length; i++) {
+              if (value >= ranges[i].divider) {
+                return '$' +(value / ranges[i].divider).toLocaleString() + ranges[i].suffix;
+              }
+            }
+            return value;
+          },
+        }
       },
       {
         type: "value",
