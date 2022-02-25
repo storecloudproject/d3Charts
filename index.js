@@ -379,12 +379,10 @@ function drawEChart6(data, title, headers) {
   const series = [];
   delete data?.Date;
   const _color = [
+    "#0068F0",
     "#12BC81",
-    "#F54A4A",
-    "#0071C6",
-    "#DE2F8F",
-    "#AF52C7",
-    "#254294",
+    "#FA484A",
+    "#B151C7",
   ];
   headers
     ?.filter((h) => h != "USD Value" && h != "Date" && h != "Total Rewards")
@@ -472,7 +470,7 @@ function drawEChart6(data, title, headers) {
     yAxis: [
       {
         type: "value",
-        name: "Revenue (USD)",
+        name: "Hypothetical revenues (USD)",
         nameLocation: "middle",
         nameGap: "60",
         max: 150000000,
@@ -486,7 +484,7 @@ function drawEChart6(data, title, headers) {
       },
       {
         type: "value",
-        name: "$STORE Price",
+        name: "Hypothetical $STORE price",
         nameLocation: "middle",
         nameGap: "30",
         max: 15,
