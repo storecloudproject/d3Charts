@@ -533,11 +533,13 @@ function drawEChart5(data, title, headers) {
       type: "line",
       name: h,
       smooth: true,
-      smoothMonotone: "x",
       symbol: "none",
-      symbolSize: 2,
+      symbolSize: 1,
       lineStyle: {
-        width: 2.5,
+        width: h === 'STORE'? 2.5 : 2.5,
+        opacity: h === 'STORE' ? 1 : 0.55,
+        shadowColor: h === 'STORE' ?  '#12BC81' : null,
+        shadowBlur: h === 'STORE' ? 10 : null
       },
       emphasis: {
         focus: "series",
@@ -552,7 +554,7 @@ function drawEChart5(data, title, headers) {
       text: title,
       ...titleStyle,
     },
-    color: ["#DE2F8F", "#12BC81", "#254294", "#0071C6", "#F54A4A", "#AF52C7"],
+    color: [ "#254294","#F23B35","#DE2F8F", "#0071C6", "#F54A4A", "#12BC81","#AF52C7","#FFB32C","#FF8E4D","#5994E4","#F7706A"],
     textStyle,
     xAxis: {
       type: "category",
@@ -570,6 +572,14 @@ function drawEChart5(data, title, headers) {
     tooltip: {
       trigger: "axis",
       confine: true,
+      formatter: (params) => {
+        let label = "";
+        for (let index = 0; index < params?.length; index++) {
+          label += `<div>${index == 0 ? "<span>Age of Network: &nbsp;&nbsp;" + params[index]?.axisValue + " Years </span> <br/>" : ""}
+          <span>${params[index].marker} ${index === 5 ? '<b>': ''} ${params[index].seriesName}:</span> <span style="float: right;"> ${params[index].value?.toLocaleString()}M ${index === 5 ? '</b>': ''}</span> </div>`;
+        }
+        return label;
+      },
     },
     legend: {
       data: headers,
@@ -583,9 +593,9 @@ function drawEChart5(data, title, headers) {
     },
     yAxis: {
       type: "value",
-      name: "Inflationary Rewards Plus Emissions (in millions)",
+      name: "Total Supply",
       nameLocation: "middle",
-      max: 1000000000,
+      max: 3000,
       nameGap: "60",
       nameTextStyle: {
         color: "#333",
@@ -595,7 +605,7 @@ function drawEChart5(data, title, headers) {
       },
       axisLabel: {
         formatter: function (value, index) {
-          return (value / 1000000)?.toLocaleString();
+          return (value)?.toLocaleString() + 'M';
         },
       },
     },
@@ -879,7 +889,6 @@ function drawEChart1(data, title, headers) {
       type: "line",
       name: h,
       smooth: true,
-      smoothMonotone: "x",
       symbol: "none",
       symbolSize: 2,
       stack: "Total",
@@ -1086,7 +1095,7 @@ $(document).ready(function () {
   );
 
   // drawEChart5
-  $.get(googleSheetUrl + "694509505&single=true&output=csv", function (csvStr) {
+  $.get(googleSheetUrl + "801531748&single=true&output=csv", function (csvStr) {
     // parse data using Papa Parse
     let data = Papa.parse(csvStr, {
       skipEmptyLines: true,
@@ -1106,7 +1115,7 @@ $(document).ready(function () {
       });
       array_data[h || "Date"] = _d;
     });
-    headers = headers?.slice(1)?.sort((a, b) => a?.localeCompare(b?.firstname));
+    headers = headers?.slice(1);
 
     // draw data
     drawEChart5(array_data, title, headers);
