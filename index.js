@@ -259,7 +259,7 @@ function drawEChart7(data, title, headers) {
   _media[0].option.yAxis[0].nameGap = "60";
   const option = {
     title: {
-      text: title,
+      // text: title,
       ...titleStyle,
     },
     color: _color,
@@ -272,6 +272,7 @@ function drawEChart7(data, title, headers) {
         nameGap: "30",
         nameTextStyle: {
           color: "#333",
+          fontSize: 13,
         },
         data: parseNumbers(blockHeight)?.map((d) => parseInt(d / 1000)),
         axisTick: {
@@ -284,6 +285,13 @@ function drawEChart7(data, title, headers) {
       {
         type: "category",
         data: dateList,
+        name: "Year",
+        nameLocation: "center",
+        nameGap: "30",
+        nameTextStyle: {
+          color: "#333",
+          fontSize: 13,
+        },
         position: "top",
         axisLine: {
           lineStyle: {
@@ -419,13 +427,13 @@ function drawEChart6(data, title, headers) {
       });
     });
   const _media = JSON.parse(JSON.stringify(media));
-  _media[0].option.grid.bottom = "110";
+  _media[0].option.grid.bottom = "155";
   _media[0].option.grid.right = "50";
-  _media[0].option.grid.left = "55";
-  _media[0].option.yAxis[0].nameGap = "40";
+  _media[0].option.grid.left = "65";
+  _media[0].option.yAxis[0].nameGap = "50";
   const option = {
     title: {
-      text: "Revenue per Governance Fund (USD Value)",
+      // text: "Revenue per Governance Fund (USD Value)",
       ...titleStyle,
     },
     textStyle,
@@ -438,6 +446,7 @@ function drawEChart6(data, title, headers) {
       nameGap: "40",
       nameTextStyle: {
         color: "#333",
+        fontSize: 13,
       },
       axisTick: {
         alignWithLabel: true,
@@ -470,7 +479,7 @@ function drawEChart6(data, title, headers) {
     yAxis: [
       {
         type: "value",
-        name: "Hypothetical revenues (USD)",
+        name: "Revenues (USD)",
         nameLocation: "middle",
         nameGap: "60",
         max: 150000000,
@@ -497,7 +506,7 @@ function drawEChart6(data, title, headers) {
       },
       {
         type: "value",
-        name: "Hypothetical $STORE price",
+        name: "$STORE price",
         nameLocation: "middle",
         nameGap: "30",
         max: 15,
@@ -547,11 +556,12 @@ function drawEChart5(data, title, headers) {
     });
   });
   const _media = JSON.parse(JSON.stringify(media));
-  _media[0].option.grid.bottom = "110";
-  _media[0].option.grid.left = "60";
+  _media[0].option.grid.bottom = "160";
+  _media[0].option.grid.left = "80";
+  _media[0].option.yAxis[0].nameGap = "60";
   const option = {
     title: {
-      text: title,
+      // text: title,
       ...titleStyle,
     },
     color: [ "#254294","#F23B35","#DE2F8F", "#0071C6", "#F54A4A", "#12BC81","#AF52C7","#FFB32C","#FF8E4D","#5994E4","#F7706A"],
@@ -559,11 +569,12 @@ function drawEChart5(data, title, headers) {
     xAxis: {
       type: "category",
       data: dateList,
-      name: "Age of Network in Years",
+      name: "YEAR #",
       nameLocation: "middle",
       nameGap: "40",
       nameTextStyle: {
         color: "#333",
+        fontSize: 13,
       },
       axisTick: {
         alignWithLabel: true,
@@ -665,7 +676,7 @@ function drawEChart4(data, title, headers) {
   _media[0].option.yAxis[1].nameGap = "50";
   const option = {
     title: {
-      text: title,
+      // text: title,
       ...titleStyle,
     },
     textStyle,
@@ -729,6 +740,32 @@ function drawEChart3(data, title, headers) {
       emphasis: {
         focus: "series",
       },
+      markPoint: {
+        data: [
+          {
+            yAxis: 750000000,
+            xAxis: 'Jun - 2031',
+            value: 'In 2030, Governance will \n vote on future security \n for the STORE protocol',
+            label: {
+              overflow: 'truncate',
+              fontSize: 12 ,
+              borderRadius: 10,
+              backgroundColor: '#fff',
+              borderColor: '#fff',
+              borderWidth: 1,
+              borderRadius: 4,
+              padding: [4, 10],
+              lineHeight: 18,
+              shadowColor: 'rgba(0, 0, 0, 0.1)',
+              shadowBlur: 5
+            },
+
+          }
+        ],
+        label: {
+          distance: [20, 8]
+        }
+      }
     });
   });
   const _color = ["#009E96", "#062587", "#AF69C5"];
@@ -738,7 +775,7 @@ function drawEChart3(data, title, headers) {
   _media[0].option.yAxis[0].nameGap = "50";
   const option = {
     title: {
-      text: title,
+     //text: title,
       ...titleStyle,
     },
     color: _color,
@@ -787,6 +824,9 @@ function drawEChart3(data, title, headers) {
       nameTextStyle: {
         fontSize: 14,
       },
+      max: function (value) {
+        return value.max + (value.max*0.2);
+      },
       axisLabel,
     },
     backgroundColor,
@@ -832,7 +872,7 @@ function drawEChart2(data, title, headers) {
   _media[0].option.yAxis[0].nameGap = "45";
   const option = {
     title: {
-      text: title,
+     // text: title,
       ...titleStyle,
     },
     textStyle,
@@ -905,6 +945,8 @@ function drawEChart1(data, title, headers) {
   });
   const _color = JSON.parse(JSON.stringify(color));
   _color[0] = "#dfdf02";
+  _color[2] = "#254294";
+  _color[4] = "#12BC81";
   const _media = JSON.parse(JSON.stringify(media));
   _media[1].option.grid.bottom = "140";
   _media[2].option.grid.bottom = "100";
@@ -913,7 +955,7 @@ function drawEChart1(data, title, headers) {
   _media[0].option.grid.bottom = "190";
   const option = {
     title: {
-      text: title,
+     // text: title,
       ...titleStyle,
     },
     textStyle,
@@ -964,9 +1006,7 @@ function drawEChart1(data, title, headers) {
       nameTextStyle: {
         fontSize: 14,
       },
-      max: function (value) {
-        return value.max + (value.max*0.2);
-      },
+
       axisLabel,
     },
     backgroundColor,
@@ -985,12 +1025,12 @@ $(document).ready(function () {
       header: false,
     })?.data;
     const title = data?.[0]?.[0];
-    data[1][1] = "Committed Supply Rewards";
+   // data[1][1] = "Committed Supply Rewards";
     data[1][2] = "Rewards for Articles Test Network";
     data[1][3] = "Team and Advisors";
     data[1][5] = "Ecosystem Fund";
     data[1][6] = "Inflationary Rewards";
-    let headers = data?.[1];
+    let headers = data?.[1]?.filter(header => header);
     data = data?.slice(2);
     const array_data = [];
     // prepapre data
@@ -1025,7 +1065,7 @@ $(document).ready(function () {
       data?.forEach((d) => {
         array_data[d[1]] = d.slice(2);
       });
-      const headers = Object.keys(array_data);
+      const headers = Object.keys(array_data)?.filter(header => header);
       // draw EChart 2
       drawEChart2(array_data, title, headers);
     }
@@ -1041,7 +1081,7 @@ $(document).ready(function () {
         header: false,
       })?.data;
       const title = data?.[0]?.[0];
-      let headers = data?.[1];
+      let headers = data?.[1]?.filter(header => header);
       data = data?.slice(2);
       const array_data = [];
 
@@ -1143,11 +1183,12 @@ $(document).ready(function () {
         array_data[d[1]] = d.slice(2);
       }
     });
-    const headers = Object.keys(array_data);
+    const headers = Object.keys(array_data)?.filter(header => header);
     // draw EChart 2
     drawEChart6(array_data, title, headers);
   });
 
+  // drawEChart7
   $.get(
     googleSheetUrl + "1709681637&single=true&output=csv",
     function (csvStr) {
@@ -1157,7 +1198,7 @@ $(document).ready(function () {
         header: false,
       })?.data;
       const title = data?.[0]?.[0];
-      let headers = data?.[1];
+      let headers = data?.[1]?.filter(header => header);
       data = data?.slice(2);
       const array_data = [];
       const dateIndex = headers?.findIndex(
