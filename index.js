@@ -257,6 +257,7 @@ function drawEChart7(data, title, headers) {
   _media[0].option.grid.right = "50";
   _media[0].option.grid.left = "80";
   _media[0].option.yAxis[0].nameGap = "60";
+  _media[0].option.legend.orient = "horizontal";
   const option = {
     title: {
       // text: title,
@@ -427,7 +428,7 @@ function drawEChart6(data, title, headers) {
       });
     });
   const _media = JSON.parse(JSON.stringify(media));
-  _media[0].option.grid.bottom = "155";
+  _media[0].option.grid.bottom = "160";
   _media[0].option.grid.right = "50";
   _media[0].option.grid.left = "65";
   _media[0].option.yAxis[0].nameGap = "50";
@@ -559,6 +560,7 @@ function drawEChart5(data, title, headers) {
   _media[0].option.grid.bottom = "160";
   _media[0].option.grid.left = "80";
   _media[0].option.yAxis[0].nameGap = "60";
+  _media[0].option.legend.orient = "horizontal";
   const option = {
     title: {
       // text: title,
@@ -587,7 +589,7 @@ function drawEChart5(data, title, headers) {
         let label = "";
         for (let index = 0; index < params?.length; index++) {
           label += `<div>${index == 0 ? "<span>Age of Network: &nbsp;&nbsp;" + params[index]?.axisValue + " Years </span> <br/>" : ""}
-          <span>${params[index].marker} ${index === 5 ? '<b>': ''} ${params[index].seriesName}:</span> <span style="float: right;"> ${params[index].value?.toLocaleString()}M ${index === 5 ? '</b>': ''}</span> </div>`;
+          <span>${params[index].marker} ${params[index].seriesName}:</span> <span style="float: right;"> ${params[index].value?.toLocaleString()}M </span> </div>`;
         }
         return label;
       },
@@ -672,8 +674,8 @@ function drawEChart4(data, title, headers) {
   });
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "80";
-  _media[0].option.grid.right = "65";
-  _media[0].option.yAxis[1].nameGap = "50";
+  _media[0].option.grid.right = "60";
+  _media[0].option.yAxis[1].nameGap = "48";
   const option = {
     title: {
       // text: title,
@@ -770,9 +772,11 @@ function drawEChart3(data, title, headers) {
   });
   const _color = ["#009E96", "#062587", "#AF69C5"];
   const _media = JSON.parse(JSON.stringify(media));
-  _media[0].option.grid.bottom = "80";
+  _media[0].option.grid.bottom = "120";
   _media[0].option.grid.left = "65";
+  _media[0].option.grid.right = "30";
   _media[0].option.yAxis[0].nameGap = "50";
+  _media[0].option.legend.orient = "horizontal";
   const option = {
     title: {
      //text: title,
@@ -869,6 +873,7 @@ function drawEChart2(data, title, headers) {
 
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.left = "60";
+  _media[0].option.grid.right = "20";
   _media[0].option.yAxis[0].nameGap = "45";
   const option = {
     title: {
@@ -951,6 +956,7 @@ function drawEChart1(data, title, headers) {
   _media[1].option.grid.bottom = "140";
   _media[2].option.grid.bottom = "100";
   _media[0].option.grid.left = "65";
+  _media[0].option.grid.right = "0";
   _media[0].option.yAxis[0].nameGap = "50";
   _media[0].option.grid.bottom = "190";
   const option = {

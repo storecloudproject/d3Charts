@@ -13,7 +13,7 @@ const color = [
 const backgroundColor = "#fff";
 const textStyle = {
   fontFamily: "Montserrat",
-  fontSize: 10,
+  fontSize: 12,
 };
 const titleStyle = {
   textAlign: "center",
@@ -60,6 +60,9 @@ const media = [
       maxAspectRatio: 1, // when length-to-width ratio is less than 1
     },
     option: {
+      textStyle: {
+        fontSize: 9,
+      },
       title: {
         textStyle: {
           width: "300",
@@ -88,11 +91,26 @@ const media = [
         },
       ],
       series: {
+        symbolSize: 10,
         label: {
-          fontSize: 12,
+          fontSize: 10,
           fontWeight: "normal",
         },
       },
+      legend: {
+        left: "10",
+        right: "10",
+        orient: 'vertical',
+        textStyle: {
+          rich: {
+            hr: {
+              width: "100%",
+              fontSize: 8,
+              height: 12,
+            },
+          },
+        }
+      }
     },
   },
   {
