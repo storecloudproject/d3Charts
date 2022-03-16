@@ -230,12 +230,12 @@ function drawEChart7(data, title, headers) {
   const myChart = echarts.init(document.getElementById("echarts-7"));
   const series = [];
   headers?.forEach((h) => {
-    if (h === "Bitcoins" || h === "% Monetary Inflation") {
+    if ((h === "Bitcoins" || h === "% Monetary Inflation") && h != '') {
       const _data = data?.[h];
       series.push({
         data: parseNumbers(_data),
         type: "line",
-        name: h === "Bitcoins" ? "Total Money Supply" : "Growth Rate %",
+        name: h === "Bitcoins" ? "Total Money Supply" : "Money Supply Growth Rate (annualized)",
         smooth: false,
         smoothMonotone: "x",
         symbol: "none",
@@ -253,11 +253,11 @@ function drawEChart7(data, title, headers) {
   });
   const _color = ["#AF69C5", "#009E96"];
   const _media = JSON.parse(JSON.stringify(media));
-  _media[0].option.grid.bottom = "80";
+  _media[0].option.grid.bottom = "100";
   _media[0].option.grid.right = "50";
-  _media[0].option.grid.left = "80";
-  _media[0].option.yAxis[0].nameGap = "60";
-  _media[0].option.legend.orient = "horizontal";
+  _media[0].option.grid.left = "60";
+  _media[0].option.yAxis[0].nameGap = "45";
+ //  _media[0].option.legend.orient = "horizontal";
   const option = {
     title: {
       // text: title,
@@ -396,6 +396,7 @@ function drawEChart6(data, title, headers) {
   headers
     ?.filter((h) => h != "USD Value" && h != "Date" && h != "Total Rewards")
     ?.forEach((h) => {
+      if(h != ''){
       const _data = data?.[h];
       series.push({
         data: parseNumbers(_data),
@@ -426,6 +427,7 @@ function drawEChart6(data, title, headers) {
           type: h === "$STORE Price" ? "dotted" : "solid",
         },
       });
+    }
     });
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "160";
@@ -537,6 +539,7 @@ function drawEChart5(data, title, headers) {
   const series = [];
   delete data?.Date;
   headers?.forEach((h) => {
+    if(h != ''){
     const _data = data?.[h];
     series.push({
       data: parseNumbers(_data),
@@ -555,6 +558,7 @@ function drawEChart5(data, title, headers) {
         focus: "series",
       },
     });
+  }
   });
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "160";
@@ -654,8 +658,7 @@ function drawEChart4(data, title, headers) {
     });
     yAxis.push({
       type: "value",
-      name:
-        index === 0 ? "Annual Money Supply Growth Rate" : "Allocated Supply",
+      name: index === 0 ? "Annual Money Supply Growth Rate" : "Allocated Supply",
       nameLocation: "middle",
       nameGap: "60",
       nameTextStyle: {
@@ -675,6 +678,7 @@ function drawEChart4(data, title, headers) {
   const _media = JSON.parse(JSON.stringify(media));
   _media[0].option.grid.bottom = "80";
   _media[0].option.grid.right = "60";
+  _media[2].option.grid.right = "80";
   _media[0].option.yAxis[1].nameGap = "48";
   const option = {
     title: {
@@ -712,6 +716,7 @@ function drawEChart4(data, title, headers) {
     grid: {
       show: true,
       top: "70",
+      right:"80",
       bottom: "80",
     },
     yAxis,
@@ -727,6 +732,7 @@ function drawEChart3(data, title, headers) {
   const myChart = echarts.init(document.getElementById("echarts-3"));
   const series = [];
   headers?.forEach((h) => {
+    if(h != ''){
     const _data = data?.[h];
     series.push({
       data: parseNumbers(_data),
@@ -769,6 +775,7 @@ function drawEChart3(data, title, headers) {
         }
       }
     });
+  }
   });
   const _color = ["#009E96", "#062587", "#AF69C5"];
   const _media = JSON.parse(JSON.stringify(media));
@@ -853,6 +860,7 @@ function drawEChart2(data, title, headers) {
         !h?.includes("Emissions from Actual Token Sales")
     )
     ?.forEach((h) => {
+      if(h != ''){
       const _data = data?.[h];
       series.push({
         data: parseNumbers(_data),
@@ -869,6 +877,7 @@ function drawEChart2(data, title, headers) {
           width: 2.5,
         },
       });
+    }
     });
 
   const _media = JSON.parse(JSON.stringify(media));
@@ -928,6 +937,7 @@ function drawEChart1(data, title, headers) {
   const myChart = echarts.init(document.getElementById("echarts-1"));
   const series = [];
   headers?.forEach((h) => {
+   if(h != ''){
     const _data = data?.[h];
     series.push({
       data: parseNumbers(_data),
@@ -947,6 +957,7 @@ function drawEChart1(data, title, headers) {
         normal: {},
       },
     });
+   }
   });
   const _color = JSON.parse(JSON.stringify(color));
   _color[0] = "#dfdf02";
@@ -1036,7 +1047,7 @@ $(document).ready(function () {
     data[1][3] = "Team and Advisors";
     data[1][5] = "Ecosystem Fund";
     data[1][6] = "Inflationary Rewards";
-    let headers = data?.[1]?.filter(header => header);
+    let headers = data?.[1];
     data = data?.slice(2);
     const array_data = [];
     // prepapre data
@@ -1067,11 +1078,13 @@ $(document).ready(function () {
       array_data["Date"] = data?.[2]?.slice(2);
       data = data?.slice(3);
 
+      data[6][1] = "Rewards for the //Second Governance test network";
+      console.log(data);
       // prepapre data
       data?.forEach((d) => {
         array_data[d[1]] = d.slice(2);
       });
-      const headers = Object.keys(array_data)?.filter(header => header);
+      const headers = Object.keys(array_data);
       // draw EChart 2
       drawEChart2(array_data, title, headers);
     }
@@ -1087,7 +1100,7 @@ $(document).ready(function () {
         header: false,
       })?.data;
       const title = data?.[0]?.[0];
-      let headers = data?.[1]?.filter(header => header);
+      let headers = data?.[1];
       data = data?.slice(2);
       const array_data = [];
 
@@ -1189,7 +1202,7 @@ $(document).ready(function () {
         array_data[d[1]] = d.slice(2);
       }
     });
-    const headers = Object.keys(array_data)?.filter(header => header);
+    const headers = Object.keys(array_data);
     // draw EChart 2
     drawEChart6(array_data, title, headers);
   });
@@ -1204,7 +1217,7 @@ $(document).ready(function () {
         header: false,
       })?.data;
       const title = data?.[0]?.[0];
-      let headers = data?.[1]?.filter(header => header);
+      let headers = data?.[1];
       data = data?.slice(2);
       const array_data = [];
       const dateIndex = headers?.findIndex(
