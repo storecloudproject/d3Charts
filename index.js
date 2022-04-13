@@ -835,9 +835,9 @@ function drawEChart3(data, title, headers) {
       nameTextStyle: {
         fontSize: 14,
       },
-      max: function (value) {
-        return value.max + (value.max*0.2);
-      },
+      // max: function (value) {
+      //   return value.max + (value.max*0.2);
+      // },
       axisLabel,
     },
     backgroundColor,
@@ -1023,7 +1023,9 @@ function drawEChart1(data, title, headers) {
       nameTextStyle: {
         fontSize: 14,
       },
-
+      max: function (value) {
+        return value.max + (value.max*0.2);
+      },
       axisLabel,
     },
     backgroundColor,
@@ -1078,7 +1080,7 @@ $(document).ready(function () {
       array_data["Date"] = data?.[2]?.slice(2);
       data = data?.slice(3);
 
-      data[6][1] = "Rewards for the //Second Governance test network";
+      // data[6][1] = "Rewards for the //Second Governance test network";
       console.log(data);
       // prepapre data
       data?.forEach((d) => {
