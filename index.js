@@ -762,7 +762,7 @@ function drawEChart3(data, title, headers) {
               borderColor: '#fff',
               borderWidth: 1,
               borderRadius: 4,
-              padding: [4, 10],
+              padding: [10, 10],
               lineHeight: 18,
               shadowColor: 'rgba(0, 0, 0, 0.1)',
               shadowBlur: 5
@@ -856,8 +856,8 @@ function drawEChart2(data, title, headers) {
     ?.filter(
       (h) =>
         h != "Date" &&
-        !h?.includes("Total Allocated") &&
-        !h?.includes("Emissions from Actual Token Sales")
+        !h?.includes("Total Allocated")
+        && !h?.includes("Emissions from Actual Token Sales")
     )
     ?.forEach((h) => {
       if(h != ''){
@@ -914,7 +914,7 @@ function drawEChart2(data, title, headers) {
     },
     yAxis: {
       type: "value",
-      name: "Maximun inflation + emission per year",
+      name: "maximun inflation + emission per year",
       nameLocation: "middle",
       nameGap: "60",
       nameTextStyle: {
@@ -992,18 +992,18 @@ function drawEChart1(data, title, headers) {
       data: headers,
       bottom: "0",
       itemGap: 15,
-      formatter: function (name) {
-        if (name == "Inflationary Rewards") {
-          return [
-            `${name}`,
-            "{hr| 10-20 Million $STORE per year, 1%-2% of Total Supply, non-compounding}",
-          ].join("\n");
-        } else if (name == "Rewards for Articles Test Network") {
-          return [`${name}`, "{hr| Up to 4 million $STORE}"].join("\n");
-        } else {
-          return name;
-        }
-      },
+      // formatter: function (name) {
+      //   if (name == "Inflationary Rewards") {
+      //     return [
+      //       `${name}`,
+      //       "{hr| 10-20 Million $STORE per year, 1%-2% of Total Supply, non-compounding}",
+      //     ].join("\n");
+      //   } else if (name == "Rewards for Articles Test Network") {
+      //     return [`${name}`, "{hr| Up to 4 million $STORE}"].join("\n");
+      //   } else {
+      //     return name;
+      //   }
+      // },
       ...legendStyle,
     },
     calculable: true,
@@ -1044,11 +1044,6 @@ $(document).ready(function () {
       header: false,
     })?.data;
     const title = data?.[0]?.[0];
-   // data[1][1] = "Committed Supply Rewards";
-    data[1][2] = "Rewards for Articles Test Network";
-    data[1][3] = "Team and Advisors";
-    data[1][5] = "Ecosystem Fund";
-    data[1][6] = "Inflationary Rewards";
     let headers = data?.[1];
     data = data?.slice(2);
     const array_data = [];
@@ -1079,9 +1074,9 @@ $(document).ready(function () {
       const array_data = [];
       array_data["Date"] = data?.[2]?.slice(2);
       data = data?.slice(3);
-
-      // data[6][1] = "Rewards for the //Second Governance test network";
-      console.log(data);
+      data[2][1] = "Max Emissions from 100-year Long-Term Treasury";
+      data[3][1] = "Max Inflationary Block Rewards";
+      data[6][1] = "Rewards for the //Second Governance test network";
       // prepapre data
       data?.forEach((d) => {
         array_data[d[1]] = d.slice(2);
