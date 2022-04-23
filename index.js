@@ -748,32 +748,32 @@ function drawEChart3(data, title, headers) {
       emphasis: {
         focus: "series",
       },
-      markPoint: {
-        data: [
-          {
-            yAxis: 750000000,
-            xAxis: 'Jun - 2031',
-            value: 'In 2030, Governance will \n vote on future security \n for the STORE protocol',
-            label: {
-              overflow: 'truncate',
-              fontSize: 12 ,
-              borderRadius: 10,
-              backgroundColor: '#fff',
-              borderColor: '#fff',
-              borderWidth: 1,
-              borderRadius: 4,
-              padding: [10, 10],
-              lineHeight: 18,
-              shadowColor: 'rgba(0, 0, 0, 0.1)',
-              shadowBlur: 5
-            },
+      // markPoint: {
+      //   data: [
+      //     {
+      //       yAxis: 750000000,
+      //       xAxis: 'Jun - 2031',
+      //       value: 'In 2030, Governance will \n vote on future security \n for the STORE protocol',
+      //       label: {
+      //         overflow: 'truncate',
+      //         fontSize: 12 ,
+      //         borderRadius: 10,
+      //         backgroundColor: '#fff',
+      //         borderColor: '#fff',
+      //         borderWidth: 1,
+      //         borderRadius: 4,
+      //         padding: [10, 10],
+      //         lineHeight: 18,
+      //         shadowColor: 'rgba(0, 0, 0, 0.1)',
+      //         shadowBlur: 5
+      //       },
 
-          }
-        ],
-        label: {
-          distance: [20, 8]
-        }
-      }
+      //     }
+      //   ],
+      //   label: {
+      //     distance: [20, 8]
+      //   }
+      // }
     });
   }
   });
