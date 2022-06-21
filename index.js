@@ -960,8 +960,9 @@ function drawEChart1(data, title, headers) {
    }
   });
   const _color = JSON.parse(JSON.stringify(color));
-  _color[0] = "#dfdf02";
-  _color[2] = "#254294";
+  _color[0] = "#234294";
+  _color[1] = "#F4396F";
+  _color[2] = "#0071C6";
   _color[4] = "#12BC81";
   const _media = JSON.parse(JSON.stringify(media));
   _media[1].option.grid.bottom = "140";
@@ -992,18 +993,13 @@ function drawEChart1(data, title, headers) {
       data: headers,
       bottom: "0",
       itemGap: 15,
-      // formatter: function (name) {
-      //   if (name == "Inflationary Rewards") {
-      //     return [
-      //       `${name}`,
-      //       "{hr| 10-20 Million $STORE per year, 1%-2% of Total Supply, non-compounding}",
-      //     ].join("\n");
-      //   } else if (name == "Rewards for Articles Test Network") {
-      //     return [`${name}`, "{hr| Up to 4 million $STORE}"].join("\n");
-      //   } else {
-      //     return name;
-      //   }
-      // },
+      formatter: function (name) {
+        if (name == "Rewards for the //First Incentivized Testnet") {
+          return 'Rewards for //First Incentivized Testnet';
+        } else {
+          return name;
+        }
+      },
       ...legendStyle,
     },
     calculable: true,
@@ -1056,7 +1052,7 @@ $(document).ready(function () {
       });
       array_data[h] = _d;
     });
-    headers = headers?.slice(1);
+    headers = headers?.slice(1)?.slice(0,6);
     // draw data
     drawEChart1(array_data, title, headers);
   });
